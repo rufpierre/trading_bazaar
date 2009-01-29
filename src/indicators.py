@@ -1,14 +1,13 @@
 
-
-# Here's our "unit".
-def IsOdd(n):
-    return n % 2 == 1
-
-
-def sma(quotes,period):
-	#return sum(quotes)/len(quotes)
-	#print range(len(quotes))
-	return [sum(quotes[0+i:period+i])/period for i in range(len(quotes)-period+1)]
+def atomic_sma(quotes, index, period):
+	return sum(quotes[0+index:period+index])/period
 	
-def ema(quotes):
-	return []
+def sma(quotes,period):
+	return [atomic_sma(quotes,i,period) for i in range(len(quotes)-period+1)]
+	
+def ema(quotes,period):
+	result = [atomic_sma(quotes,0,period)]
+	N = period
+	k = 2/(1+N)
+	[ result.append((k*result[i]+(1-k)*quotes[i+period])) for i in range(0,len(quotes)-period)]
+	return result
