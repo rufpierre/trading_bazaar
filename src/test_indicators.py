@@ -12,7 +12,7 @@ class IsOddTests(unittest.TestCase):
     #    self.failIf(indicators.IsOdd(2))
 
 	def test_sma(self):
-		self.assertEqual(indicators.sma([2,3,5,6]),4)
+		self.assertEqual(indicators.sma([2,3,5,6],3),[3,4])
 
 def main():
     #print indicators.IsOdd(2)
